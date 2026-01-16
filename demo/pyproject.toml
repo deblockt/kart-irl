@@ -8,5 +8,6 @@ dependencies = [
     "numpy>=2.4.1",
     "opencv-contrib-python>=4.11.0.86",
     "scipy>=1.15.0",
-    "pandas"
+    "pandas",
+    "matplotlib>=3.8.0",
 ]

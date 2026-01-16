@@ -20,6 +20,7 @@ Each directory contains the following files:
   - `direction_percent`: steering direction (-100=left, 0=straight, +100=right)
   - `direction_enum`: LEFT, STRAIGHT, or RIGHT
   - `direction_angle_deg`: estimated steering angle (-45° to +45°)
+- `map.png` : 2D map of the track generated from video and sensors (see `generate_map.py`)
 
 ## Synchronization
 
@@ -126,3 +127,31 @@ uv run python tracks/convert_to_motor.py tracks/track1
 | `direction_percent` | Direction (-100=gauche, 0=droit, +100=droite) |
 | `direction_enum` | LEFT, STRAIGHT, ou RIGHT |
 | `direction_angle_deg` | Angle de braquage estimé (-45° à +45°) |
+
+### generate_map.py
+
+Génère une carte 2D du circuit à partir de la vidéo et des données capteurs.
+
+```bash
+uv run python tracks/generate_map.py tracks/track1
+uv run python tracks/generate_map.py tracks/track1 --output custom_map.png
+uv run python tracks/generate_map.py tracks/track1 --no-show
+```
+
+**Fonctionnalités:**
+- Calcule la trajectoire du kart par intégration (vitesse + gyroscope)
+- Détecte les portes ArUco dans la vidéo
+- Estime la position des portes sur la carte
+- Génère une image PNG avec la trajectoire et les portes
+
+**Sortie:** `map.png` dans le dossier du track
+
+### utils.py
+
+Module utilitaire contenant les fonctions partagées entre les scripts :
+- Chargement des données (calibration, sensors, motor)
+- Synchronisation video/sensors
+- Filtres (passe-bas, passe-haut)
+- Gestion vidéo (rotation, ouverture)
+- Détection ArUco
+- Calcul de trajectoire
