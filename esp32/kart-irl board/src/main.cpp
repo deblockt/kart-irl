@@ -1,18 +1,21 @@
-#include <Arduino.h>
+#include <ArduinoOTA.h>
 
-// put function declarations here:
-int myFunction(int, int);
+#include "config.h"
+#include "led.h"
+#include "log.h"
+#include "wifi_manager.h"
+#include "servo_controller.h"
 
 void setup() {
-  // put your setup code here, to run once:
-  int result = myFunction(2, 3);
+  ledSetup(LED_FLASH);
+  logSetup();
+  wifiSetup(WIFI_SSID, WIFI_PASSWORD);
+  logStartTelnet();
+  servoSetup(SERVO_PIN);
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-}
-
-// put function definitions here:
-int myFunction(int x, int y) {
-  return x + y;
+  ArduinoOTA.handle();
+  logLoop();
+  servoLoop();
 }
