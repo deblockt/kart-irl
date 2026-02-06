@@ -1,47 +1,47 @@
 # Kart IRL
 
-Projet de kart en réalité augmentée inspiré de Mario Kart Live.
+Augmented reality kart project inspired by Mario Kart Live.
 
-## Structure du projet
+## Project Structure
 
 ```
 kart-irl/
-├── server/      # Serveur Python (traitement vidéo, overlay, moteur de jeu)
-├── esp32/       # Code du microcontrôleur ESP-32 pour le kart
-├── webapp/      # Application web pour la diffusion vidéo
-└── docs/        # Documentation technique (schémas, spécifications)
+├── server/      # Python server (video processing, overlay, game engine)
+├── esp32/       # ESP-32 microcontroller code for the kart
+├── webapp/      # Web application for video streaming
+└── docs/        # Technical documentation (schematics, specifications)
 ```
 
 ## Modules
 
 ### Server
-Serveur Python responsable de :
-- Réception et traitement du flux vidéo des karts
-- Injection d'éléments en superposition (items, UI, effets)
-- Gestion du moteur de jeu (collisions, items, scores)
+Python server responsible for:
+- Receiving and processing the video stream from the karts
+- Injecting overlay elements (items, UI, effects)
+- Managing the game engine (collisions, items, scores)
 
 ### ESP-32
-Code embarqué pour le kart :
-- Contrôle des moteurs
-- Streaming vidéo via caméra
-- Communication WiFi avec le serveur
+Embedded code for the kart:
+- Motor control
+- Video streaming via camera
+- WiFi communication with the server
 
 ### Webapp
-Application web permettant :
-- Visualisation du flux vidéo augmenté
-- Interface de contrôle du kart
-- Affichage des informations de course
+Web application providing:
+- Real-time augmented video stream display
+- Kart control interface
+- Race information display
 
 ### Docs
-Documentation technique incluant :
-- Schémas électroniques du kart
-- Diagrammes de câblage ESP-32
-- Spécifications du protocole de communication
+Technical documentation including:
+- Kart electronic schematics
+- ESP-32 wiring diagrams
+- Communication protocol specifications
 
 ## Installation
 
-Voir le README de chaque module pour les instructions d'installation spécifiques.
+See each module's README for specific installation instructions.
 
-## Licence
+## License
 
-À définir
+TBD

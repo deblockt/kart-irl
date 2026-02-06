@@ -1,37 +1,37 @@
 # Webapp
 
-Application web pour la visualisation et le contrôle du kart.
+Web application for kart visualization and control.
 
-## Fonctionnalités
+## Features
 
-- Affichage du flux vidéo augmenté en temps réel
-- Interface de contrôle du kart (joystick virtuel ou clavier)
-- Affichage des informations de course (position, items, temps)
-- Support multi-joueurs
+- Real-time augmented video stream display
+- Kart control interface (virtual joystick or keyboard)
+- Race information display (position, items, time)
+- Multiplayer support
 
 ## Technologies
 
-- (À définir : React, Vue, Svelte, etc.)
+- (TBD: React, Vue, Svelte, etc.)
 
-## Prérequis
+## Prerequisites
 
 - Node.js 18+
-- (À compléter)
+- (To be completed)
 
 ## Installation
 
 ```bash
-# À compléter
+# To be completed
 ```
 
-## Développement
+## Development
 
 ```bash
-# À compléter
+# To be completed
 ```
 
 ## Build
 
 ```bash
-# À compléter
+# To be completed
 ```

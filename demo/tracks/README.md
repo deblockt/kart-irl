@@ -82,7 +82,7 @@ There are **4 gates** that the kart passes through. Each gate consists of two Ar
 
 ### calib_track.py
 
-Génère le fichier `calib.csv` en détectant automatiquement le point de synchronisation entre la vidéo et les capteurs (via un "tap" physique).
+Generates the `calib.csv` file by automatically detecting the synchronization point between the video and sensors (via a physical "tap").
 
 ```bash
 uv run python tracks/calib_track.py tracks/track1
@@ -90,47 +90,47 @@ uv run python tracks/calib_track.py tracks/track1
 
 ### ar_viewer.py
 
-Affiche la vidéo avec overlay AR des tags ArUco détectés et les données IMU synchronisées.
+Displays the video with AR overlay of detected ArUco tags and synchronized IMU data.
 
 ```bash
 uv run python tracks/ar_viewer.py tracks/track1
 ```
 
-**Fonctionnalités:**
-- Détection des tags ArUco avec contour et ID
-- Identification des portes (1-4) avec indication gauche/droite
-- Ligne entre les deux tags quand une porte complète est visible
-- Overlay des données IMU (vitesse, orientation, données brutes)
-- Correction automatique de l'orientation vidéo (portrait/paysage)
+**Features:**
+- ArUco tag detection with contour and ID
+- Gate identification (1-4) with left/right indication
+- Line between the two tags when a complete gate is visible
+- IMU data overlay (speed, orientation, raw data)
+- Automatic video orientation correction (portrait/landscape)
 
-**Contrôles:**
-- `Espace` : Pause/Play
-- `Q` / `Échap` : Quitter
-- `R` : Reset vitesse et orientation
-- `←` / `→` : Reculer/Avancer d'1 frame
-- `,` / `.` : Reculer/Avancer d'1 seconde
+**Controls:**
+- `Space`: Pause/Play
+- `Q` / `Esc`: Quit
+- `R`: Reset speed and orientation
+- `←` / `→`: Step back/forward 1 frame
+- `,` / `.`: Step back/forward 1 second
 
 ### convert_to_motor.py
 
-Convertit les données IMU (accel.csv, gyro.csv) en données moteur simulées pour tester sans ESP32.
+Converts IMU data (accel.csv, gyro.csv) into simulated motor data for testing without an ESP32.
 
 ```bash
 uv run python tracks/convert_to_motor.py tracks/track1
 ```
 
-**Sortie:** `motor.csv` avec les colonnes:
-| Colonne | Description |
-|---------|-------------|
-| `seconds_elapsed` | Temps relatif au point de sync |
-| `speed_ms` | Vitesse estimée en m/s |
-| `speed_percent` | Vitesse normalisée (0-100%) |
-| `direction_percent` | Direction (-100=gauche, 0=droit, +100=droite) |
-| `direction_enum` | LEFT, STRAIGHT, ou RIGHT |
-| `direction_angle_deg` | Angle de braquage estimé (-45° à +45°) |
+**Output:** `motor.csv` with the following columns:
+| Column | Description |
+|--------|-------------|
+| `seconds_elapsed` | Time relative to sync point |
+| `speed_ms` | Estimated speed in m/s |
+| `speed_percent` | Normalized speed (0-100%) |
+| `direction_percent` | Direction (-100=left, 0=straight, +100=right) |
+| `direction_enum` | LEFT, STRAIGHT, or RIGHT |
+| `direction_angle_deg` | Estimated steering angle (-45° to +45°) |
 
 ### generate_map.py
 
-Génère une carte 2D du circuit à partir de la vidéo et des données capteurs.
+Generates a 2D map of the track from video and sensor data.
 
 ```bash
 uv run python tracks/generate_map.py tracks/track1
@@ -138,20 +138,20 @@ uv run python tracks/generate_map.py tracks/track1 --output custom_map.png
 uv run python tracks/generate_map.py tracks/track1 --no-show
 ```
 
-**Fonctionnalités:**
-- Calcule la trajectoire du kart par intégration (vitesse + gyroscope)
-- Détecte les portes ArUco dans la vidéo
-- Estime la position des portes sur la carte
-- Génère une image PNG avec la trajectoire et les portes
+**Features:**
+- Computes the kart trajectory by integration (speed + gyroscope)
+- Detects ArUco gates in the video
+- Estimates gate positions on the map
+- Generates a PNG image with the trajectory and gates
 
-**Sortie:** `map.png` dans le dossier du track
+**Output:** `map.png` in the track directory
 
 ### utils.py
 
-Module utilitaire contenant les fonctions partagées entre les scripts :
-- Chargement des données (calibration, sensors, motor)
-- Synchronisation video/sensors
-- Filtres (passe-bas, passe-haut)
-- Gestion vidéo (rotation, ouverture)
-- Détection ArUco
-- Calcul de trajectoire
+Utility module containing shared functions across scripts:
+- Data loading (calibration, sensors, motor)
+- Video/sensor synchronization
+- Filters (low-pass, high-pass)
+- Video management (rotation, opening)
+- ArUco detection
+- Trajectory computation

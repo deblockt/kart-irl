@@ -1,39 +1,39 @@
 # ESP-32
 
-Code embarqué pour le microcontrôleur ESP-32 du kart.
+Embedded code for the kart's ESP-32 microcontroller.
 
-## Fonctionnalités
+## Features
 
-- Contrôle des moteurs (direction, vitesse)
-- Capture et streaming vidéo via ESP32-CAM
-- Communication WiFi bidirectionnelle avec le serveur
-- Réception des commandes de contrôle
+- Motor control (steering, speed)
+- Video capture and streaming via ESP32-CAM
+- Bidirectional WiFi communication with the server
+- Control command reception
 
-## Matériel requis
+## Required Hardware
 
-- ESP32-CAM ou ESP32 + module caméra
-- Châssis de kart avec moteurs
-- Driver moteur (L298N ou similaire)
-- Batterie LiPo
-- (À compléter selon le design final)
+- ESP32-CAM or ESP32 + camera module
+- Kart chassis with motors
+- Motor driver (L298N or similar)
+- LiPo battery
+- (To be completed based on final design)
 
-## Environnement de développement
+## Development Environment
 
-- PlatformIO ou Arduino IDE
-- (À compléter)
+- PlatformIO or Arduino IDE
+- (To be completed)
 
 ## Installation
 
 ```bash
-# À compléter
+# To be completed
 ```
 
-## Flashage
+## Flashing
 
 ```bash
-# À compléter
+# To be completed
 ```
 
-## Schéma de câblage
+## Wiring Diagram
 
-Voir `/docs` pour les schémas détaillés.
+See `/docs` for detailed schematics.

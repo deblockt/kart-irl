@@ -1,30 +1,30 @@
-# Documentation Technique
+# Technical Documentation
 
-Documentation technique du projet Kart IRL.
+Technical documentation for the Kart IRL project.
 
-## Contenu
+## Contents
 
-### Schémas du kart
-- Design mécanique du châssis
-- Liste des composants
+### Kart Schematics
+- Mechanical chassis design
+- Component list
 
-### Électronique
-- Schéma de câblage ESP-32
-- Connexions moteurs
-- Alimentation
+### Electronics
+- ESP-32 wiring diagram
+- Motor connections
+- Power supply
 
-### Protocole de communication
-- Format des messages serveur <-> ESP-32
-- Format des messages serveur <-> webapp
-- Spécifications du streaming vidéo
+### Communication Protocol
+- Server <-> ESP-32 message format
+- Server <-> webapp message format
+- Video streaming specifications
 
-### Architecture logicielle
-- Diagrammes d'architecture
-- Flux de données
+### Software Architecture
+- Architecture diagrams
+- Data flow
 
 ## Formats
 
-Les schémas peuvent être réalisés avec :
-- Fritzing (électronique)
-- Draw.io / Excalidraw (diagrammes)
-- KiCad (PCB si nécessaire)
+Schematics can be created with:
+- Fritzing (electronics)
+- Draw.io / Excalidraw (diagrams)
+- KiCad (PCB if needed)

@@ -1,28 +1,28 @@
 # Server
 
-Serveur Python pour le traitement vidéo et la gestion du moteur de jeu.
+Python server for video processing and game engine management.
 
-## Fonctionnalités
+## Features
 
-- Réception du flux vidéo des karts via WiFi
-- Détection et tracking des éléments sur le circuit (marqueurs ArUco)
-- Injection d'overlays en temps réel (items, effets visuels, UI)
-- Moteur de jeu (gestion des collisions, items, scores)
-- Streaming du flux augmenté vers la webapp
+- Receiving the video stream from karts via WiFi
+- Detection and tracking of circuit elements (ArUco markers)
+- Real-time overlay injection (items, visual effects, UI)
+- Game engine (collision management, items, scores)
+- Streaming the augmented feed to the webapp
 
-## Prérequis
+## Prerequisites
 
 - Python 3.14+
-- uv (gestionnaire de dépendances)
-- Webcam (pour les tests)
+- uv (dependency manager)
+- Webcam (for testing)
 
 ## Installation
 
 ```bash
-# Installer uv si nécessaire
+# Install uv if needed
 curl -LsSf https://astral.sh/uv/install.sh | sh
 
-# Installer les dépendances
+# Install dependencies
 cd server
 uv sync
 ```
