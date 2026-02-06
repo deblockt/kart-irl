@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kart IRL</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Arial, sans-serif; background: #1a1a2e; color: #eee; text-align: center; padding: 20px; }
+    h1 { margin-bottom: 20px; }
+    .status { padding: 8px 16px; border-radius: 20px; display: inline-block; margin-bottom: 30px; font-size: 14px; }
+    .connected { background: #4CAF50; }
+    .disconnected { background: #f44336; }
+    .card { background: #16213e; border-radius: 12px; padding: 20px; margin: 15px auto; max-width: 400px; }
+    .card h2 { margin-bottom: 15px; font-size: 18px; }
+    input[type="range"] { width: 100%; accent-color: #4CAF50; }
+    .angle { font-size: 32px; font-weight: bold; margin: 10px 0; }
+    .btn { padding: 12px 30px; font-size: 16px; border: none; border-radius: 8px; cursor: pointer; margin: 5px; }
+    .btn-on { background: #4CAF50; color: white; }
+    .btn-off { background: #f44336; color: white; }
+    .btn.active { outline: 3px solid white; }
+  </style>
+</head>
+<body>
+  <h1>Kart IRL</h1>
+  <div id="status" class="status disconnected">Connexion...</div>
+
+  <div class="card">
+    <h2>Servo</h2>
+    <div class="angle" id="servoValue">90°</div>
+    <input type="range" id="servo" min="0" max="180" value="90">
+  </div>
+
+  <div class="card">
+    <h2>LED</h2>
+    <button class="btn btn-on" id="ledOn">ON</button>
+    <button class="btn btn-off" id="ledOff">OFF</button>
+  </div>
+
+  <script>
+    let ws;
+    const status = document.getElementById('status');
+    const slider = document.getElementById('servo');
+    const servoValue = document.getElementById('servoValue');
+    const btnOn = document.getElementById('ledOn');
+    const btnOff = document.getElementById('ledOff');
+
+    function connect() {
+      ws = new WebSocket('ws://' + location.hostname + '/ws');
+
+      ws.onopen = () => {
+        status.textContent = 'Connecté';
+        status.className = 'status connected';
+      };
+
+      ws.onclose = () => {
+        status.textContent = 'Déconnecté';
+        status.className = 'status disconnected';
+        setTimeout(connect, 2000);
+      };
+
+      ws.onerror = () => ws.close();
+    }
+
+    let lastSend = 0;
+    slider.oninput = () => {
+      servoValue.textContent = slider.value + '°';
+      const now = Date.now();
+      if (now - lastSend > 50) {
+        ws.send(JSON.stringify({type: 'servo', angle: parseInt(slider.value)}));
+        lastSend = now;
+      }
+    };
+    slider.onchange = () => {
+      ws.send(JSON.stringify({type: 'servo', angle: parseInt(slider.value)}));
+    };
+
+    btnOn.onclick = () => {
+      ws.send(JSON.stringify({type: 'led', state: 'on'}));
+      btnOn.classList.add('active');
+      btnOff.classList.remove('active');
+    };
+
+    btnOff.onclick = () => {
+      ws.send(JSON.stringify({type: 'led', state: 'off'}));
+      btnOff.classList.add('active');
+      btnOn.classList.remove('active');
+    };
+
+    connect();
+  </script>
+</body>
+</html>
