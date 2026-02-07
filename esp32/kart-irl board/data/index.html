@@ -29,8 +29,14 @@
   <div id="status" class="status disconnected">Connexion...</div>
 
   <div class="card">
+    <h2>Camera</h2>
+    <img id="camera" style="width:100%;border-radius:8px;" />
+    <script>document.getElementById('camera').src='http://'+location.hostname+':81/stream';</script>
+  </div>
+
+  <div class="card">
     <h2>Servo</h2>
-    <div class="angle" id="servoValue">90°</div>
+    <div class="angle" id="servoValue">90&deg;</div>
     <input type="range" id="servo" min="0" max="180" value="90">
   </div>
 
@@ -39,7 +45,7 @@
     <div class="speed-value" id="speedValue">0%</div>
     <div class="speed-label">Avant</div>
     <input type="range" class="speed-slider" id="speed" min="-100" max="100" value="0">
-    <div class="speed-label">Arrière</div>
+    <div class="speed-label">Arriere</div>
   </div>
 
   <div class="card">
@@ -60,24 +66,21 @@
 
     function connect() {
       ws = new WebSocket('ws://' + location.hostname + '/ws');
-
       ws.onopen = () => {
-        status.textContent = 'Connecté';
+        status.textContent = 'Connecte';
         status.className = 'status connected';
       };
-
       ws.onclose = () => {
-        status.textContent = 'Déconnecté';
+        status.textContent = 'Deconnecte';
         status.className = 'status disconnected';
         setTimeout(connect, 2000);
       };
-
       ws.onerror = () => ws.close();
     }
 
     let lastSend = 0;
     slider.oninput = () => {
-      servoValue.textContent = slider.value + '°';
+      servoValue.textContent = slider.value + '\u00B0';
       const now = Date.now();
       if (now - lastSend > 50) {
         ws.send(JSON.stringify({type: 'servo', angle: parseInt(slider.value)}));
@@ -121,7 +124,6 @@
       btnOn.classList.add('active');
       btnOff.classList.remove('active');
     };
-
     btnOff.onclick = () => {
       ws.send(JSON.stringify({type: 'led', state: 'off'}));
       btnOff.classList.add('active');
