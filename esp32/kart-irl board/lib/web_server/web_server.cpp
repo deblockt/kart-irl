@@ -53,6 +53,12 @@ static const char INDEX_HTML[] PROGMEM = R"rawliteral(<!DOCTYPE html>
   </div>
 
   <div class="card">
+    <h2>Camera</h2>
+    <img id="camera" style="width:100%;border-radius:8px;" />
+    <script>document.getElementById('camera').src='http://'+location.hostname+':81/stream';</script>
+  </div>
+
+  <div class="card">
     <h2>LED</h2>
     <button class="btn btn-on" id="ledOn">ON</button>
     <button class="btn btn-off" id="ledOff">OFF</button>
