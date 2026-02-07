@@ -19,6 +19,9 @@
     .btn-on { background: #4CAF50; color: white; }
     .btn-off { background: #f44336; color: white; }
     .btn.active { outline: 3px solid white; }
+    .speed-slider { writing-mode: vertical-lr; direction: rtl; height: 200px; width: 40px; accent-color: #2196F3; }
+    .speed-value { font-size: 32px; font-weight: bold; margin: 10px 0; }
+    .speed-label { font-size: 12px; color: #999; }
   </style>
 </head>
 <body>
@@ -32,6 +35,14 @@
   </div>
 
   <div class="card">
+    <h2>Moteurs</h2>
+    <div class="speed-value" id="speedValue">0%</div>
+    <div class="speed-label">Avant</div>
+    <input type="range" class="speed-slider" id="speed" min="-100" max="100" value="0">
+    <div class="speed-label">Arrière</div>
+  </div>
+
+  <div class="card">
     <h2>LED</h2>
     <button class="btn btn-on" id="ledOn">ON</button>
     <button class="btn btn-off" id="ledOff">OFF</button>
@@ -42,6 +53,8 @@
     const status = document.getElementById('status');
     const slider = document.getElementById('servo');
     const servoValue = document.getElementById('servoValue');
+    const speedSlider = document.getElementById('speed');
+    const speedValue = document.getElementById('speedValue');
     const btnOn = document.getElementById('ledOn');
     const btnOff = document.getElementById('ledOff');
 
@@ -74,6 +87,34 @@
     slider.onchange = () => {
       ws.send(JSON.stringify({type: 'servo', angle: parseInt(slider.value)}));
     };
+
+    let lastSpeedSend = 0;
+    function sendSpeed() {
+      const pct = parseInt(speedSlider.value);
+      speedValue.textContent = pct + '%';
+      const now = Date.now();
+      if (now - lastSpeedSend > 50) {
+        const pwm = Math.round(pct * 255 / 100);
+        ws.send(JSON.stringify({type: 'engine', speed: pwm}));
+        lastSpeedSend = now;
+      }
+    }
+    speedSlider.oninput = sendSpeed;
+    speedSlider.onchange = () => {
+      const pct = parseInt(speedSlider.value);
+      const pwm = Math.round(pct * 255 / 100);
+      ws.send(JSON.stringify({type: 'engine', speed: pwm}));
+    };
+    speedSlider.addEventListener('touchend', () => {
+      speedSlider.value = 0;
+      speedValue.textContent = '0%';
+      ws.send(JSON.stringify({type: 'engine', speed: 0}));
+    });
+    speedSlider.addEventListener('mouseup', () => {
+      speedSlider.value = 0;
+      speedValue.textContent = '0%';
+      ws.send(JSON.stringify({type: 'engine', speed: 0}));
+    });
 
     btnOn.onclick = () => {
       ws.send(JSON.stringify({type: 'led', state: 'on'}));
